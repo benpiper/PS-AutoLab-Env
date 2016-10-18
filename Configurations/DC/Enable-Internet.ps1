@@ -8,7 +8,9 @@ Note: All scripts require WMF 5 or above, and to run from PowerShell using "Run 
 #Requires -version 5.0
 #Requires -runasadministrator
 
-Clear-Host
+#Clear-Host
+Write-Host -ForegroundColor Green -Object "This doesn't do anything, because the Internet is EVERYWHERE. Welcome to the Matrix."
+<#
 Write-Host -ForegroundColor Green -Object @"
 
     This is the Enable-Internet script. This script will perform the following:
@@ -51,4 +53,4 @@ Function Set-Internet {
 
 Set-Internet
 
-
+#>

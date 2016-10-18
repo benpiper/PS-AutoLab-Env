@@ -1,15 +1,6 @@
 <# Notes:
 
-Authors: Jason Helmick and Melissa (Missy) Janusko
-
-The bulk of this DC, DHCP, ADCS config is authored by Melissa (Missy) Januszko.
-Currently on her public DSC hub located here:
-https://github.com/majst32/DSC_public.git
-
 Goal - Create a Domain Controller, Populute with OU's Groups and Users.
-       One Server joined to the new domain
-       One Windows 10 CLient joined to the new domain
-
        
 
 Disclaimer
@@ -27,10 +18,10 @@ demonstrations and would need to be modified for your environment.
             
             # Common networking
             InterfaceAlias = 'Ethernet'
-            DefaultGateway = '192.168.3.1'
+            DefaultGateway = '192.168.88.1'
             SubnetMask = 24
             AddressFamily = 'IPv4'
-            DnsServerAddress = '192.168.3.10'
+            DnsServerAddress = '192.168.88.10'
                        
             # Domain and Domain Controller information
             DomainName = "Company.Pri"
@@ -42,7 +33,7 @@ demonstrations and would need to be modified for your environment.
             PSDscAllowDomainUser = $true 
                         
             # Lability default node settings
-            Lability_SwitchName = 'LabNet'
+            Lability_SwitchName = 'Management'
             Lability_ProcessorCount = 1
             Lability_StartupMemory = 1GB
             SecureBoot = $false
@@ -62,29 +53,12 @@ demonstrations and would need to be modified for your environment.
         }
         @{
             NodeName = 'DC'
-            IPAddress = '192.168.3.10'
+            IPAddress = '192.168.88.10'
             Role = 'DC'
             Lability_BootOrder = 10
             Lability_BootDelay = 60 # Number of seconds to delay before others
-            Lability_timeZone = 'US Mountain Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
-        }
-        @{
-            NodeName = 'S1'
-            IPAddress = '192.168.3.50'
-            Role = @('DomainJoin', 'Web')
-            Lability_BootOrder = 20
-            Lability_timeZone = 'US Mountain Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
-        }
-        @{
-            NodeName = 'Client'
-            IPAddress = '192.168.3.100'
-            Role = 'DomainJoin'
-            Lability_ProcessorCount = 2
-            Lability_StartupMemory = 2GB
-            Lability_Media = 'WIN10_x64_Enterprise_EN_Eval'
-            Lability_BootOrder = 20
-            Lability_timeZone = 'US Mountain Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
-        }
+            Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
+        }      
 
         
     );
@@ -93,7 +67,7 @@ demonstrations and would need to be modified for your environment.
             # EnvironmentPrefix = 'PS-GUI-' # this will prefix the VM names                                    
             Media = @(); # Custom media additions that are different than the supplied defaults (media.json)
             Network = @( # Virtual switch in Hyper-V
-                @{ Name = 'LabNet'; Type = 'Internal'; NetAdapterName = 'Ethernet'; AllowManagementOS = $true;}
+                @{ Name = 'Management'; Type = 'External'; NetAdapterName = 'Management'; AllowManagementOS = $true;}
             );
             DSCResource = @(
                 ## Download published version from the PowerShell Gallery or Github
