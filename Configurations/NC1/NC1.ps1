@@ -129,18 +129,12 @@ Configuration AutoLab {
             Credential = $DomainCredential
             DependsOn = '[xWaitForADDomain]DSCForestWait'
         }
-    }#end DomianJoin Config
+    }#end DomainJoin Config
 #endregion
 
 #region Network Controller config
 
-    node $AllNodes.Where({$_.Role -eq 'NetworkController'}).NodeName {
-
-        $DomainCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList ("$($node.DomainName)\$($Credential.UserName)", $Credential.Password)
- 
-        xComputer ComputerName { 
-            Name = $Node.NodeName 
-        }            
+    node $AllNodes.Where({$_.Role -eq 'NetworkController'}).NodeName {             
 
         ## Hack to fix DependsOn with hypens "bug" :(
         foreach ($feature in @(

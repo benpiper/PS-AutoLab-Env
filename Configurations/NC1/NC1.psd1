@@ -54,7 +54,7 @@ demonstrations and would need to be modified for your environment.
         @{
             NodeName = 'NC1'
             IPAddress = '192.168.88.11'
-            Role = 'DomainJoin'
+            Role = @('DomainJoin', 'NetworkController')
             Lability_BootOrder = 10
             Lability_BootDelay = 60 # Number of seconds to delay before others
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
