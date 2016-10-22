@@ -63,7 +63,7 @@ Write-Host -ForegroundColor Cyan -Object 'Building the lab environment'
 Start-LabConfiguration -ConfigurationData .\*.psd1 -path .\ -NoSnapshot 
 # Disable secure boot for VM's
 Get-VM ( Get-LabVM -ConfigurationData .\*.psd1 ).Name -OutVariable vm
-Set-VMFirmware -VM $vm -EnableSecureBoot Off -SecureBootTemplate MicrosoftUEFICertificateAuthority
+Set-VMFirmware -VM $vm -EnableSecureBoot Off
 
 
 Write-Host -ForegroundColor Green -Object @"
