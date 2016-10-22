@@ -138,14 +138,14 @@ Configuration AutoLab {
 
         ## Hack to fix DependsOn with hypens "bug" :(
         foreach ($feature in @(
-                'NetworkController'
-
+                'NetworkController',
+                'RSAT-NetworkController'
             )) {
             WindowsFeature $feature.Replace('-','') {
                 Ensure = 'Present';
                 Name = $feature;
                 IncludeAllSubFeature = $True;
-            }
+            }            
         } #End foreach                 
        
     } #end nodes DC
