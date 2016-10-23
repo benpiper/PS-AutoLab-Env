@@ -34,7 +34,7 @@ demonstrations and would need to be modified for your environment.
                         
             # Lability default node settings           
             Lability_SwitchName = 'Management'
-            Lability_ProcessorCount = 4
+            Lability_ProcessorCount = 2
             Lability_StartupMemory = 4GB
             Lability_MinimumMemory = 4GB
             Lability_MaximumMemory = 4GB          
@@ -58,7 +58,7 @@ demonstrations and would need to be modified for your environment.
             IPAddress = '192.168.88.11'
             Role = @('DomainJoin', 'NetworkController')
             Lability_BootOrder = 10
-            Lability_BootDelay = 60 # Number of seconds to delay before others
+            Lability_BootDelay = 20 # Number of seconds to delay before others
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
         }      
 
