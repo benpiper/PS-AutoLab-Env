@@ -1,6 +1,6 @@
 <# Notes:
 
-Goal - Create a Domain Controller, Populute with OU's Groups and Users.
+Goal - Build a vanilla network controller VM.
     
 
 Disclaimer

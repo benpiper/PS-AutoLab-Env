@@ -32,10 +32,12 @@ demonstrations and would need to be modified for your environment.
             PSDscAllowPlainTextPassword = $true
             PSDscAllowDomainUser = $true 
                         
-            # Lability default node settings
+            # Lability default node settings           
             Lability_SwitchName = 'Management'
             Lability_ProcessorCount = 4
             Lability_StartupMemory = 4GB
+            Lability_MinimumMemory = 4GB
+            Lability_MaximumMemory = 4GB          
             SecureBoot = $false
             Lability_Media = '2016_x64_Datacenter_EN_Eval' # Can be Core,Win10,2012R2,nano
                                                        # 2016_x64_Standard_EN_Eval
