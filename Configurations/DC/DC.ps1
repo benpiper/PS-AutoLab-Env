@@ -76,6 +76,17 @@ Configuration AutoLab {
 #endregion
 
 #region Firewall Rules
+<#
+        xFirewall Firewall {
+            Name = 'AllowMgmtNetwork'
+            DisplayName = 'Allow management network'
+            Ensure = 'Present'
+            Enabled = 'True'
+            Profile = 'Any'
+            Direction = 'Inbound'
+            Protocol = 'TCP'
+            RemoteAddress = '192.168.88.1-192.168.88.254'
+        }           #>      
                 
         xFirewall 'FPS-ICMP4-ERQ-In' {
             Name = 'FPS-ICMP4-ERQ-In'
@@ -202,6 +213,22 @@ Configuration AutoLab {
                 Category = 'Security'
                 GroupScope = 'Universal'
                 Members = 'PSIT', 'bpiper'
+                DependsOn = '[xADDomain]FirstDC'
+            }
+
+            xADGroup NCManagementAdmins {
+                GroupName = 'NCManagementAdmins'
+                Category = 'Security'
+                GroupScope = 'DomainLocal'
+                Members = 'Administrator', 'bpiper', 'PSIT'
+                DependsOn = '[xADDomain]FirstDC'
+            }                 
+
+            xADGroup NCRestClients {
+                GroupName = 'NCRestClients'
+                Category = 'Security'
+                GroupScope = 'DomainLocal'
+                Members = 'Administrator', 'bpiper', 'PSIT'
                 DependsOn = '[xADDomain]FirstDC'
             }
            
