@@ -35,7 +35,9 @@ demonstrations and would need to be modified for your environment.
             # Lability default node settings
             Lability_SwitchName = 'Management'
             Lability_ProcessorCount = 1
-            Lability_StartupMemory = 1GB
+            Lability_StartupMemory = 2GB
+            Lability_MaximumMemory = 2GB
+            Lability_MinimumMemory = 2GB
             SecureBoot = $false
             Lability_Media = '2016_x64_Standard_Core_EN_Eval' # Can be Core,Win10,2012R2,nano
                                                        # 2016_x64_Standard_EN_Eval
@@ -56,7 +58,7 @@ demonstrations and would need to be modified for your environment.
             IPAddress = '192.168.88.10'
             Role = 'DC'
             Lability_BootOrder = 10
-            Lability_BootDelay = 60 # Number of seconds to delay before others
+            Lability_BootDelay = 5 # Number of seconds to delay before others
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
         }      
 
