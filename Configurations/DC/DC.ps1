@@ -23,7 +23,8 @@ Configuration AutoLab {
     Import-DSCresource -ModuleName PSDesiredStateConfiguration,
         @{ModuleName="xActiveDirectory";ModuleVersion="2.13.0.0"},
         @{ModuleName="xComputerManagement";ModuleVersion="1.8.0.0"},
-        @{ModuleName="xNetworking";ModuleVersion="2.12.0.0"}
+        @{ModuleName="xNetworking";ModuleVersion="2.12.0.0"},
+        @{ModuleName="xDnsServer";ModuleVersion="1.7.0.0"}
 
 #endregion
 
@@ -126,7 +127,7 @@ Configuration AutoLab {
     node $AllNodes.Where({$_.Role -eq 'DC'}).NodeName {
 
         $DomainCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList ("$($node.DomainName)\$($Credential.UserName)", $Credential.Password)
- 
+      
         xComputer ComputerName { 
             Name = $Node.NodeName 
         }            
@@ -231,6 +232,14 @@ Configuration AutoLab {
                 Members = 'Administrator', 'bpiper', 'PSIT'
                 DependsOn = '[xADDomain]FirstDC'
             }
+
+            xDnsServerForwarder SetForwarder {
+                IPAddresses = $Node.DnsForwarder
+                IsSingleInstance = 'Yes'
+                DependsOn = '[xADDomain]FirstDC'
+            }
+            
+
            
        
     } #end nodes DC

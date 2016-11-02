@@ -21,7 +21,7 @@ demonstrations and would need to be modified for your environment.
             DefaultGateway = '192.168.88.1'
             SubnetMask = 24
             AddressFamily = 'IPv4'
-            DnsServerAddress = '192.168.88.10'
+            DnsServerAddress = '192.168.88.10'            
                        
             # Domain and Domain Controller information
             DomainName = "Company.Pri"
@@ -34,7 +34,7 @@ demonstrations and would need to be modified for your environment.
                         
             # Lability default node settings
             Lability_SwitchName = 'Management'
-            Lability_ProcessorCount = 1
+            Lability_ProcessorCount = 2
             Lability_StartupMemory = 2GB
             Lability_MaximumMemory = 2GB
             Lability_MinimumMemory = 2GB
@@ -56,6 +56,7 @@ demonstrations and would need to be modified for your environment.
         @{
             NodeName = 'DC'
             IPAddress = '192.168.88.10'
+            DnsForwarder = @('192.168.88.1')
             Role = 'DC'
             Lability_BootOrder = 10
             Lability_BootDelay = 5 # Number of seconds to delay before others
@@ -76,6 +77,7 @@ demonstrations and would need to be modified for your environment.
                 @{ Name = 'xActiveDirectory'; RequiredVersion="2.13.0.0"; Provider = 'PSGallery'; },
                 @{ Name = 'xComputerManagement'; RequiredVersion = '1.8.0.0'; Provider = 'PSGallery'; }
                 @{ Name = 'xNetworking'; RequiredVersion = '2.12.0.0'; Provider = 'PSGallery'; }
+                @{ Name = 'xDnsServer'; RequiredVersion = '1.7.0.0'; Provider = 'PSGallery'; }
 
             );
         };
