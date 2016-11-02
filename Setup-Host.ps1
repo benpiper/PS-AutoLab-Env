@@ -11,15 +11,14 @@ Clear-Host
 Write-Host -ForegroundColor Green -Object @"
 
     This is the Setup-Host script. This script will perform the following:
-    * For PowerShell Remoting, Set the host 'TrustedHosts' value to *
+    #* For PowerShell Remoting, Set the host 'TrustedHosts' value to *
     * Install the Lability module from PSGallery
     * Install Hyper-V
     * Create the C:\Lability folder (DO NOT DELETE)
     * Copy configurations and resources to C:\Lability
     * You will then need to reboot the host before continuing
 
-    Note! - You may delete the folder c:\PS-AutoLab-Env when this setup finished and the system
-            has been rebooted.
+    Note! - You may delete the folder c:\PS-AutoLab-Env when this setup is finished.
 
 "@
 
@@ -43,7 +42,7 @@ else {
 # Lability install
 Write-Host -ForegroundColor Cyan "Installing Lability for the lab build"
 Get-PackageSource -Name PSGallery | Set-PackageSource -Trusted -Force -ForceBootstrap
-Install-Module -Name Lability -RequiredVersion 0.10.0 -Force
+Install-Module -Name Lability -RequiredVersion 0.10.0 -Force -SkipPublisherCheck
 
 # Installing modules to host(Author) machine need to run configs - this will be replaced
 # In the next build - will auto-read from Cofniguration File
@@ -52,13 +51,14 @@ Install-Module -Name xComputerManagement -RequiredVersion 1.8.0.0
 Install-Module -Name xNetworking -RequiredVersion 2.12.0.0
 Install-Module -Name xDhcpServer -RequiredVersion 1.5.0.0
 Install-Module -Name xADCSDeployment -RequiredVersion 1.0.0.0
+Install-Module -Name xDnsServer -RequiredVersion 1.7.0.0
 
 # SEtup host Env.
 # Dev Note -- Should use If state with Test-LabHostConfiguration -- it returns true or false
 $HostStatus=Test-LabHostConfiguration
 If ($HostStatus -eq $False) {
     Write-Host -ForegroundColor Cyan "Starting to Initialize host and install Hyper-V" 
-    Start-LabHostConfiguration -ErrorAction SilentlyContinue
+    Start-LabHostConfiguration -ErrorAction SilentlyContinue -Verbose
 }
 
 ###### COPY Configs to host machine
@@ -72,8 +72,7 @@ Copy-item -Path C:\PS-AutoLab-Env\media.json -Destination 'C:\Program Files\Wind
 
 Write-Host -ForegroundColor Green -Object @"
 
-    The Host is about to reboot.
-    After the reboot, open Powershell, navigate to a configuration directory
+    After setup is complete, open Powershell, navigate to a configuration directory
     C:\Lability\Configuration\<yourconfigfolder>
     And run:
     
@@ -81,10 +80,13 @@ Write-Host -ForegroundColor Green -Object @"
 
 "@
 
-Write-Host -ForegroundColor Yellow -Object "Note! - You may delete the folder c:\PS-AutoLab-Env when this setup finished and the system
-            has been rebooted."
-
-Pause
-Restart-Computer
+$HostStatus=Test-LabHostConfiguration
+If ($HostStatus -eq $False) {
+    Write-Host -ForegroundColor Yellow -Object "The machine is about to reboot."
+    Pause
+    Restart-Computer
+} else {
+Write-Host -ForegroundColor Yellow -Object "All done!"
+}
 
 
