@@ -233,6 +233,14 @@ Configuration AutoLab {
                 DependsOn = '[xADDomain]FirstDC'
             }
 
+            xADGroup DNSAdmins {
+                GroupName = 'DNSAdmins'
+                Category = 'Security'
+                GroupScope = 'DomainLocal'
+                Members = 'Administrator'
+                DependsOn = '[xADDomain]FirstDC'
+            }
+
             xDnsServerForwarder SetForwarder {
                 IPAddresses = $Node.DnsForwarder
                 IsSingleInstance = 'Yes'
