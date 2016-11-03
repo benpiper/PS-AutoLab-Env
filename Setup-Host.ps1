@@ -45,7 +45,7 @@ Get-PackageSource -Name PSGallery | Set-PackageSource -Trusted -Force -ForceBoot
 Install-Module -Name Lability -RequiredVersion 0.10.0 -Force -SkipPublisherCheck
 
 # Installing modules to host(Author) machine need to run configs - this will be replaced
-# In the next build - will auto-read from Cofniguration File
+# In the next build - will auto-read from Configuration File
 Install-Module -Name xActiveDirectory -RequiredVersion 2.13.0.0
 Install-Module -Name xComputerManagement -RequiredVersion 1.8.0.0
 Install-Module -Name xNetworking -RequiredVersion 2.12.0.0
