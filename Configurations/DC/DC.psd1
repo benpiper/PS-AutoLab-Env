@@ -18,10 +18,10 @@ demonstrations and would need to be modified for your environment.
             
             # Common networking
             InterfaceAlias = 'Ethernet'
-            DefaultGateway = '192.168.88.1'
+            DefaultGateway = '192.168.3.1'
             SubnetMask = 24
             AddressFamily = 'IPv4'
-            DnsServerAddress = '192.168.88.10'            
+            DnsServerAddress = '192.168.3.10'            
                        
             # Domain and Domain Controller information
             DomainName = "Company.Pri"
@@ -55,8 +55,8 @@ demonstrations and would need to be modified for your environment.
         }
         @{
             NodeName = 'DC'
-            IPAddress = '192.168.88.10'
-            DnsForwarder = @('192.168.88.1')
+            IPAddress = '192.168.3.10'
+            DnsForwarder = @('192.168.3.1')
             Role = 'DC'
             Lability_BootOrder = 10
             Lability_BootDelay = 5 # Number of seconds to delay before others
