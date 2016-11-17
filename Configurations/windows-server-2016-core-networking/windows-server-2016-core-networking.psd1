@@ -55,23 +55,19 @@
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
         },
         @{
-            NodeName = 'WEB1'
+            NodeName = 'FILE1'
+            Role = 'FileServer'
             Lability_BootOrder = 20
             Lability_BootDelay = 30 # Number of seconds to delay before others
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
         },
         @{
-            NodeName = 'WEB2'
+            NodeName = 'FILE2'
+            Role = 'FileServer'
             Lability_BootOrder = 30
             Lability_BootDelay = 60 # Number of seconds to delay before others
             Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
-        },
-        @{
-            NodeName = 'FILE1'
-            Lability_BootOrder = 40
-            Lability_BootDelay = 90 # Number of seconds to delay before others
-            Lability_timeZone = 'US Eastern Standard Time' #[System.TimeZoneInfo]::GetSystemTimeZones()
-        }
+        } 
         
     );
     NonNodeData = @{
