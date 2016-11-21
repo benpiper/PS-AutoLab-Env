@@ -254,13 +254,15 @@ Configuration AutoLab {
 
 #endregion 
 
-<#
-#region Web config
-   node $AllNodes.Where({$_.Role -eq 'Web'}).NodeName {
+
+#region File server config
+   node $AllNodes.Where({$_.Role -eq 'FileServer'}).NodeName {
         
         foreach ($feature in @(
-                'web-Server'
- 
+                'FS-FileServer'
+                'FS-DFS-Namespace'
+                'FS-DFS-Replication'
+
             )) {
             WindowsFeature $feature.Replace('-','') {
                 Ensure = 'Present'
@@ -269,7 +271,7 @@ Configuration AutoLab {
             }
         }
         
-    }#end Web Config
+    }#end File server Config
 
 
 #region DomainJoin config
