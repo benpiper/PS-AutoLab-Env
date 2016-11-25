@@ -18,7 +18,6 @@ Write-Host -ForegroundColor Green -Object @"
     * Copy configurations and resources to C:\Lability
     * You will then need to reboot the host before continuing
 
-    Note! - You may delete the folder c:\PS-AutoLab-Env when this setup is finished.
 
 "@
 
