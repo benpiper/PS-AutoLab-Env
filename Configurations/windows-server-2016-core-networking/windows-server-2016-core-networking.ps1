@@ -298,5 +298,5 @@ Configuration AutoLab {
 } # End AllNodes
 #endregion
 
-AutoLab -OutputPath .\ -ConfigurationData .\DC.psd1
+AutoLab -OutputPath .\ -ConfigurationData .\windows-server-2016-core-networking.psd1
 
